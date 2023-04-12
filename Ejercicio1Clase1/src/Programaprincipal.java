@@ -3,55 +3,76 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 public class Programaprincipal {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
-		/*Partido unPartido=new Partido(); 
-		
-		Equipo miEquipo=new Equipo();
-		miEquipo.nombre="Argentina";
-		
-		Equipo miEquipo2=new Equipo();
-		miEquipo.nombre="Arabia";
-		
-		unPartido.equipo1=miEquipo;
-		unPartido.equipo2=miEquipo2;*/
-		
 		ArrayList<Partido>listaPartidos=new ArrayList<Partido>();
 		
-		Partido unPartido;
+		Partido Partido;
 		
-		Equipo unEquipo1;
-		Equipo unEquipo2;
+		Equipo Equipo1;
+		Equipo Equipo2;
 		
 		String archivo = "Archivo\\Resultados.txt";
 		for (String linea : Files.readAllLines(Paths.get(archivo))){
-		String lineas[]=linea.split(" ");
+		String lineas[] = linea.split(" ");
 		
-		unPartido=new Partido();
-		unEquipo1=new Equipo();
-		unEquipo2=new Equipo();
+		Partido=new Partido();
+		Equipo1=new Equipo();
+		Equipo2=new Equipo();
 		
-		unEquipo1.nombre=lineas[0];
-		unEquipo2.nombre=lineas[3];
-		unPartido.equipo1=unEquipo1;
-		unPartido.equipo2=unEquipo2;
-		unPartido.golesEquipo1=Integer.parseInt(lineas[1]);
-		unPartido.golesEquipo2=Integer.parseInt(lineas[2]);
-		listaPartidos.add(unPartido);
+		Equipo1.setNombre(lineas[0]);
+		Equipo2.setNombre(lineas[3]);
+		Partido.setEquipo1(Equipo1);
+		Partido.setEquipo2(Equipo2);
+		Partido.setGolesEquipo1(Integer.parseInt(lineas[1]));
+		Partido.setGolesEquipo2(Integer.parseInt(lineas[2]));
+		listaPartidos.add(Partido);
 		}
 		
-		for (int i=0; i<listaPartidos.size();i++)
+		for (int i=0; i<listaPartidos.size(); i++)
 		{
-		JOptionPane.showMessageDialog(null,listaPartidos.get(i).equipo1.nombre+"  "+listaPartidos.get(i).golesEquipo1+" "+listaPartidos.get(i).golesEquipo2+" "+listaPartidos.get(i).equipo2.nombre);
-						
-						
-					}
+			System.out.println(listaPartidos.get(i).getEquipo1().getNombre() + "  " + listaPartidos.get(i).getGolesEquipo1() + " " + 
+							listaPartidos.get(i).getGolesEquipo2() + " " + listaPartidos.get(i).getEquipo2().getNombre());
+					
+		}
+		ArrayList<Pronostico>listaPronostico=new ArrayList<Pronostico>();
 		
+		Pronostico Pronostico;
+		
+		Equipo miEquipo1;
+		Equipo miEquipo2;
+		
+		String archivoPronostico = "Archivo\\Pronostico.txt";
+		for (String lineaPronostico : Files.readAllLines(Paths.get(archivoPronostico))){
+		String lineasPronostico[] = lineaPronostico.split(" ");
+		
+		Pronostico=new Pronostico();
+		miEquipo1=new Equipo();
+		miEquipo2=new Equipo();
+		
+		miEquipo1.setNombre(lineasPronostico[0]);
+		miEquipo2.setNombre(lineasPronostico[4]);
+		Pronostico.setEquipo1(miEquipo1);
+		Pronostico.setEquipo2(miEquipo2);
+		Pronostico.setGanaEquipo1(Integer.parseInt(lineasPronostico[1]));
+		Pronostico.setGanaEquipo2(Integer.parseInt(lineasPronostico[2]));
+		Pronostico.setEmpate(Integer.parseInt(lineasPronostico[3]));
+		listaPronostico.add(Pronostico);
+		}
+		
+		for (int i=0; i<listaPronostico.size(); i++)
+		{
+	
+			System.out.println(listaPronostico.get(i).getEquipo1().getNombre() + "  " + listaPronostico.get(i).getGanaEquipo1() + " " + 
+							listaPronostico.get(i).getEmpate() + " " + 
+							listaPronostico.get(i).getGanaEquipo2() + " " + listaPronostico.get(i).getEquipo2().getNombre());
+					
+		}
+		
+
 	
 
 		
